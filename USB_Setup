@@ -1,0 +1,49 @@
+#/bin/env bash
+
+
+# Download OS X Yosemite Installer application
+if [[ ! -d /Applications/Install\ OS\ X\ Yosemite.app ]]
+  then
+  echo "Download OS X Yosemite. When it is downloaded and the installation start, stop it. ** Do not Install OS X Yosemite **"
+  open macappstore://itunes.apple.com/us/app/os-x-yosemite/id915041082?mt=12#
+else
+  echo "OS X Yosemite is already downloaded."
+fi
+
+# Make sure the USB to setup for the installer is ready
+while [[ ! -d /Volumes/Yosemite ]]
+do
+  echo "Insert a USB drive and make sure it's name is 'Yosemite'"
+  echo "Press enter when ready..."
+  read
+done
+
+# Mount InstallESD.dmg
+sudo hdiutil attach /Applications/Install\ OS\ X\ Yosemite.app/Contents/SharedSupport/InstallESD.dmg
+# Format the USB driver
+echo "Formatting USB Drive 'Yosemite'"
+sudo asr restore -source /Volumes/OS\ X\ Install\ ESD/BaseSystem.dmg -target /Volumes/Yosemite -erase -format HFS+
+# Erase Packages alias
+sudo rm -f /Volumes/OS\ X\ Base\ System/System/Installation/Packages
+
+echo "Copying information into the USB Drive 'Yosemite'"
+# Copy the Packages directory into the USB
+sudo cp -a /Volumes/OS\ X\ Install\ ESD/Packages /Volumes/OS\ X\ Base\ System/System/Installation/Packages
+# Copy BaseSystem.chunklist
+sudo cp -a /Volumes/OS\ X\ Install\ ESD/BaseSystem.chunklist /Volumes/OS\ X\ Base\ System
+# Copy BaseSystem.dmg
+sudo cp -a /Volumes/OS\ X\ Install\ ESD/BaseSystem.dmg /Volumes/OS\ X\ Base\ System
+
+# Umount InstallESD.dmg
+hdiutil detach /Volumes/OS\ X\ Install\ ESD
+
+# Rename USB drive name
+/usr/sbin/diskutil rename 'OS X Base System' 'Yosemite Installer'
+
+echo "The USB Drive is ready."
+
+echo "Remove it and plug it into the Mac to reinstall. Or, if this is the Mac to reinstall, enter the command: reboot"
+
+echo "Remember to hold key Option (Alt in Windows keyboard) to open the installer"
+
+exit 0

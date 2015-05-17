@@ -1,2 +1,146 @@
 #/bin/env bash
 
+[[ ! -e /usr/bin/ruby ]] && echo "Weird, Ruby is not installed" && exit 1
+[[ ! -e /usr/bin/curl ]] && echo "Weird, Curl is not installed" && exit 1
+
+# Install App Store applications
+# OS X Server
+open macappstore://itunes.apple.com/us/app/os-x-server/id883878097?mt=12
+# iLife: iMovie & GarageBand
+open macappstore://itunes.apple.com/us/app/imovie/id408981434?mt=12
+open macappstore://itunes.apple.com/us/app/garageband/id682658836?mt=12
+# iWork: Pages, Numbers & Keynotes
+open macappstore://itunes.apple.com/us/app/pages/id409201541?mt=12
+open macappstore://itunes.apple.com/us/app/numbers/id409203825?mt=12
+open macappstore://itunes.apple.com/us/app/keynote/id409183694?mt=12
+# Xcode
+open macappstore://itunes.apple.com/us/app/xcode/id497799835?mt=12
+# Apple Configurator
+open macappstore://itunes.apple.com/us/app/apple-configurator/id434433123?mt=12
+
+# Design: Art Text 2, Logo Pop Free & Mac Fonts
+open macappstore://itunes.apple.com/us/app/art-text-2/id404180306?mt=12
+open macappstore://itunes.apple.com/us/app/logo-pop-free/id919007298?mt=12
+open macappstore://itunes.apple.com/us/app/macfonts-free-fonts-collection/id604108855?mt=12
+open macappstore://itunes.apple.com/us/app/macfonts-contemporaryfonts/id414919026?mt=12
+# Remote Desktop
+open macappstore://itunes.apple.com/us/app/microsoft-remote-desktop/id715768417?mt=12
+# My Movies Pro
+open macappstore://itunes.apple.com/us/app/my-movies-pro/id465069360?mt=12
+# OneDrive
+open macappstore://itunes.apple.com/us/app/onedrive/id823766827?mt=12
+# Games: PAC-MAN
+open macappstore://itunes.apple.com/us/app/pac-man/id412380476?mt=12
+# SQLPro for SQLite
+open macappstore://itunes.apple.com/us/app/sqlpro-for-sqlite-sql-database/id586001240?mt=12
+# MindNode Pro
+# open macappstore://itunes.apple.com/us/app/mindnode-pro/id402398561?mt=12
+# JumSoft Money
+# https://itunes.apple.com/us/app/money-by-jumsoft/id402410845?mt=12
+
+
+# Install Homebrew
+if [[ ! -e /usr/local/bin/brew ]]
+  then
+  ruby -e "$(curl -fsSL open macappstore://raw.githubusercontent.com/Homebrew/install/master/install)"
+  echo "Brew is installed"
+fi
+# Check and Update HomeBrew
+brew doctor
+brew update
+
+# Install wget and rbenv
+brew install wget
+brew install rbenv ruby-build
+(
+cat <<'EORBENV'
+
+# rbenv environment setup
+eval "$(rbenv init -)"
+
+EORBENV
+) >> ~/.bash_profile
+
+eval "$(rbenv init -)"
+rbenv install 2.2.2
+
+# Install HomeBrew Cask
+brew install caskroom/cask/brew-cask
+
+(
+cat <<'EOBREW'
+
+# Function to print the outdated applications installed with brew-cask
+brew_cask_outdate () {
+  for c in `brew-cask list`
+  do 
+    if [[ "${c}" != *"!"* ]] 
+      then 
+      ! brew-cask info $c | grep -qF "Not installed" || echo $c
+    fi 
+  done
+}
+
+# Function to upgrade all the brew-cask installed applications
+brew_cask_upgrade_all () {
+  brew update
+  for c in `brew-cask list`
+  do 
+    if [[ "${c}" != *"!"* ]]
+      then
+      ! brew-cask info $c | grep -qF "Not installed" || brew-cask install $c 
+    fi
+  done
+}
+
+EOBREW
+) >> ~/.bashrc
+
+# Install Internet Browsers: Chrome, Firefox & Tor
+brew-cask install google-chrome firefox torbrowser
+
+# Install Cloud Storage Managers: Dropbox, Box-Sync & Google Drive
+brew-cask install dropbox box-sync google-drive
+
+# Install Media Tools: HandBrake, Subler, MakeMKV, MakeMKV Tools, VLC, Transmission, GIMP, iChm & Spotify
+brew-cask install handbrake handbrakebatch handbrakecli subler sublercli makemkv mkvtools vlc transmission gimp ichm spotify
+
+# Install Development and DevOps Tools: Sublime Text, Visual Studio Code, Github, PyCharm CE, RubyMine, Scratch & WebStorm
+brew-cask install sublime-text3 visual-studio-code github pycharm-ce rubymine scratch webstorm
+
+# TEST: Scratch installer with Brew-Cask may be failing. If so, install it from: https://scratch.mit.edu/scratch2download/
+
+# Install DevOps Tools: VirtualBox, Boot2Docker, Kitematic, Packer & Vagrant
+brew-cask install virtualbox boot2docker kitematic packer vagrant vagrant-manager
+(
+cat <<'EOBO2D'
+
+# Docker and Boot2docker environment setup
+eval "$(boot2docker shellinit)"
+
+EOBO2D
+) >> ~/.bash_profile
+
+# Install Quick Look Plugins: betterzipql, qlcolorcode, qlmarkdown, qlstephen, quicklook-csv, quicklook-json, suspicious-package & webp-quicklook
+brew-cask install betterzipql qlcolorcode qlmarkdown qlstephen quicklook-csv quicklook-json suspicious-package webp-quicklook
+
+# Install IoT Tools: Arduino & Fritzing
+brew-cask install arduino fritzing
+
+# Install Communication Apps: VMWare Horizon Client, Colloquy & Skype
+brew-cask install vmware-horizon-client colloquy skype
+
+# Install Other Tools: Caffeine, Cheatsheet, 1Password, Spectacle (organize windows), UnRar, JumSoft Money & MindNode Pro
+brew-cask install caffeine cheatsheet onepassword spectacle unrarx money mindnode-pro
+
+# TODO: Install and Configure Node, NPM and Yosemite
+# TODO: Add this to ~/.bashrc for NPM
+# NPM_PACKAGES="/Users/johandry/.npm-packages"
+# NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
+# PATH="$NPM_PACKAGES/bin:$PATH"
+# # Unset manpath so we can inherit from /etc/manpath via the `manpath`
+# # command
+# unset MANPATH  # delete if you already modified MANPATH elsewhere in your config
+# MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
+
+# TODO: Download Applications from disks

@@ -11,7 +11,9 @@ This is my guide and collection of scripts to setup from scratch my Mac Mini. I 
 
 In a Mac (could the the Mac Mini to restore or other Mac), clone/download this repository
 
+  ```
   $ git clone git@github.com:johandry/mac_mini_setup.git
+  ```
 
 There are 2 options: Setup and Provision a Mac from scratch or a Mac with OS X already installed.
 
@@ -32,15 +34,14 @@ There are 2 options: Setup and Provision a Mac from scratch or a Mac with OS X a
 
 3. Start up the Mac Mini while holding the Option key (Alt key if it is a Windows keyboard)
 
-4. Join to a wireless network, then use the arrow key to highlight the USB drive (could be named 'OS X Base System' or 'Yosemite Installer'), press enter and you will see the Yosemite Installer Welcome screen. Follow the instructions to install the OS X in Macintosh HD disk.
+4. Join to a wireless network, then use the arrow key to highlight the USB drive (could be named 'OS X Base System' or 'Yosemite Installer'), press enter and you will see the Yosemite Installer screen.
 
-WARNING: The next step is to erase your hard drive. I have a Time Machine to backup my disks but if you don't have it, make sure you backup your data before erase the disk.
+5. **WARNING** This step is to erase your hard drive, make sure you backup your data before erase the disk or have Time Machine with your backups.
+  In the top menu select Tools -> Disk Utility. Select the Macintosh HD disk and go to Erase tab then click on Erase botton. When the erase is completed I also go to First Aid tab and select Repair Disk, just in case there are some disk errors.
 
-5. Follow the structions as desired, then select Disk Utility to Erase the Macintosh HD disk. Make sure you select the 'Mac OS Extended (Journaled)' format.
+6. Select Quit Disk Utility in the top menu and select Install OS X. Follow the instructions to install Yosemite OS X
 
-6. Select Quit Disk Utility and select Install OS X. Follow the instructions to install Yosemite OS X
-
-  Source: http://macs.about.com/od/OS-X-Yosemite/ss/Perform-a-Clean-Install-of-OS-X-Yosemite-on-Your-Macs-Startup-Drive_3.htm#step-heading
+  **_Source_**: http://macs.about.com/od/OS-X-Yosemite/ss/Perform-a-Clean-Install-of-OS-X-Yosemite-on-Your-Macs-Startup-Drive_3.htm#step-heading
 
   If you need more information or details to install Yosemite read to the source.
 

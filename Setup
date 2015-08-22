@@ -105,8 +105,8 @@ brew-cask install dropbox box-sync google-drive
 # Install Media Tools: HandBrake, Subler, MakeMKV, MakeMKV Tools, VLC, Transmission, GIMP, iChm & Spotify
 brew-cask install handbrake handbrakebatch handbrakecli subler sublercli makemkv mkvtools vlc transmission gimp ichm spotify
 
-# Install Development and DevOps Tools: Sublime Text, Visual Studio Code, Github, PyCharm CE, RubyMine, Scratch & WebStorm
-brew-cask install sublime-text3 visual-studio-code github pycharm-ce rubymine scratch webstorm
+# Install Development and DevOps Tools: Sublime Text, Visual Studio Code, Github, PyCharm CE, RubyMine, Scratch, WebStorm & MacDown
+brew-cask install sublime-text3 visual-studio-code github pycharm-ce rubymine scratch webstorm macdown
 
 # TEST: Scratch installer with Brew-Cask may be failing. If so, install it from: https://scratch.mit.edu/scratch2download/
 
@@ -134,7 +134,16 @@ brew-cask install vmware-horizon-client colloquy skype
 brew-cask install caffeine cheatsheet onepassword spectacle unrarx money mindnode-pro
 
 # TODO: Install and Configure Node, NPM and Yosemite
+
+# Install Node, NPM and Yosemite
+brew install node
+npm install -g coffee-script grunt-cli jshint
+
+# Install MongoDB
+brew install mongo redis 
+
 # TODO: Add this to ~/.bashrc for NPM
+
 # NPM_PACKAGES="/Users/johandry/.npm-packages"
 # NODE_PATH="$NPM_PACKAGES/lib/node_modules:$NODE_PATH"
 # PATH="$NPM_PACKAGES/bin:$PATH"
@@ -144,3 +153,12 @@ brew-cask install caffeine cheatsheet onepassword spectacle unrarx money mindnod
 # MANPATH="$NPM_PACKAGES/share/man:$(manpath)"
 
 # TODO: Download Applications from disks
+
+# TODO: Install Python, Pip and Fig
+
+# TODO: Create Development structure
+mkdir ~/Workspace
+cd !$
+mkdir Sandboxes
+#git clone ...
+

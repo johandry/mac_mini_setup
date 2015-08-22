@@ -45,7 +45,9 @@ There are 2 options: Setup and Provision a Mac from scratch or a Mac with OS X a
 
   If you need more information or details to install Yosemite read to the source.
 
-7. Update the OS X Yosemite to the latest version.
+7. Connect the keyboard, trackpad and/or mouse and configure them in System Preferences
+
+8. Update the OS X Yosemite to the latest version, if needed. Open App Store -> Updates
 
 ### Setup and Provision a Mac with OS X already installed.
 
@@ -62,4 +64,9 @@ This provision script may change from time to time but there are some base softw
 
 * [Homebrew](http://brew.sh/): Required to install all the software.
 * [Homebrew Cask](http://caskroom.io/): Extension to Homebrew to install OS X Applications and large binaries.
-* 
+* [rbenv](http://rbenv.org/): Ruby environment manager
+* Browsers: Chrome, Firefox and Tor
+* Cloud Storage Managers: Dropbox, Box Sync and Google Drive
+* Media Tools: HandBrake, Subler, VLC, Transmission, Spotify
+* Development & DevOps Tools: Sublime Text, Visual Studio Code, Github, VirtualBox, Boot2Docker, Kitematic, Packer and Vagrant
+* Other Applications such as: Skype, Caffeine and UnRar
